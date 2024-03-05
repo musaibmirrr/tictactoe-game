@@ -169,3 +169,18 @@ section {
         width: 60px;
     }
 }
+
+@media (min-width:617px){
+    .container{
+        width: 330px;
+    }
+    .boxes{
+        width: 100px;
+        height: 100px;
+    }
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

@@ -144,6 +144,28 @@ section {
         height: 80px;
     }
 
+    body{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+}
 
+@media (max-width:380px){
+    .container{
+        width: 180px;
+    }
 
+    .boxes{
+        width: 50px;
+        height: 50px;
+    }
+
+    #btn1{
+        width: 60px;
+    }
+    #btn2{
+        width: 60px;
+    }
 }

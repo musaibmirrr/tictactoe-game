@@ -150,6 +150,10 @@ section {
         justify-content: center;
         align-items: center;
     }
+
+    .nav{
+        width: 260px;
+    }
 }
 
 @media (max-width:380px){
@@ -168,6 +172,10 @@ section {
     #btn2{
         width: 60px;
     }
+
+    .nav{
+        width: 200px;
+    }
 }
 
 @media (min-width:617px){
@@ -182,5 +190,13 @@ section {
         display: flex;
         justify-content: center;
         align-items: center;
+    }
+    .nav{
+        display: flex;
+        justify-content: space-around;
+        width: 400px;
+    }
+    .footer{
+        width: 400px;
     }
 }

@@ -13,6 +13,8 @@ Clean and intuitive user interface designed with HTML and styled with CSS.
 Responsive layout to support gameplay on both desktop and mobile devices.
 Clear indication of game status, including player turns, win conditions, and game outcomes.
 Lightweight and minimalistic design for fast loading and smooth gameplay experience.
+User has to click the toss button which will decide amoung the two player's, whose turn is going to be first.
+In addition there is a reset button too which will restart the game.
 
 Technologies Used
 JavaScript: Used for game logic and interactivity.

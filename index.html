@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700">
+</head>
+
+<body>
+    <section class="nav">
+        <span id="p1">P1</span>
+        <span id="winnerMsg"></span>
+        <span id="p2">P2</span>
+    </section>
+    <div class="container">
+        <button class="boxes" id="box1"></button>
+        <button class="boxes" id="box2"></button>
+        <button class="boxes" id="box3"></button>
+        <button class="boxes" id="box4"></button>
+        <button class="boxes" id="box5"></button>
+        <button class="boxes" id="box6"></button>
+        <button class="boxes" id="box7"></button>
+        <button class="boxes" id="box8"></button>
+        <button class="boxes" id="box9"></button>
+    </div>
+    <section class="footer">
+        <button id="btn1">Toss</button>
+        <button id="btn2"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                <path
+                    d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9" />
+                <path fill-rule="evenodd"
+                    d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z" />
+            </svg></button>
+    </section>
+
+
+
+
+    <script>
+        // all variable declaration
+        const container = document.querySelector('.container');
+        const box1 = document.querySelector('#box1');
+        const box2 = document.querySelector('#box2');
+        const box3 = document.querySelector('#box3');
+        const box4 = document.querySelector('#box4');
+        const box5 = document.querySelector('#box5');
+        const box6 = document.querySelector('#box6');
+        const box7 = document.querySelector('#box7');
+        const box8 = document.querySelector('#box8');
+        const box9 = document.querySelector('#box9');
+        const btn1 = document.querySelector('#btn1');
+        const p1 = document.querySelector('#p1');
+        const p2 = document.querySelector('#p2');
+        const reset = document.querySelector('#btn2');
+        const winnerMsg = document.querySelector('#winnerMsg');
+
+        let turnP1 = null;
+        let turnP2 = null;
+        let turn = 0;
+        let isX = null;
+        let is0 = null;
+        let box1Val = '1';
+        let box2Val = '2';
+        let box3Val = '3';
+        let box4Val = '4';
+        let box5Val = '5';
+        let box6Val = '6';
+        let box7Val = '7';
+        let box8Val = '8';
+        let box9Val = '9';
+
+        // Board 
+        // 1|2|3
+        // 4|5|6
+        // 7|8|9
+
+        // This functions checks draw
+        function checkDraw() {
+            if (box1Val != 1 && box2Val != 2 && box3Val != 3 && box4Val != 4 && box5Val != 5 && box6Val != 6 && box7Val != 7 && box8Val != 8 && box9Val != 9) {
+                if (turnP1 == false) {
+                    p2.classList.toggle('border');
+                } else if (turnP2 == false) {
+                    p1.classList.toggle('border');
+                }
+                box1.style.backgroundColor = "#ffb703";
+                box2.style.backgroundColor = "#ffb703";
+                box3.style.backgroundColor = "#ffb703";
+                box4.style.backgroundColor = "#ffb703";
+                box5.style.backgroundColor = "#ffb703";
+                box6.style.backgroundColor = "#ffb703";
+                box7.style.backgroundColor = "#ffb703";
+                box8.style.backgroundColor = "#ffb703";
+                box9.style.backgroundColor = "#ffb703";
+                winnerMsg.innerHTML = "It's a Tie!";
+            }
+        }
+        // This function disables buttons if there was a winner
+        function disabler() {
+            box1.disabled = true;
+            box2.disabled = true;
+            box3.disabled = true;
+            box4.disabled = true;
+            box5.disabled = true;
+            box6.disabled = true;
+            box7.disabled = true;
+            box8.disabled = true;
+            box9.disabled = true;
+        }
+
+
+        // This function checks for a winner
+        function winnerCheck() {
+            if (turnP1 == false) {
+                if (box1Val === box2Val && box2Val === box3Val || box1Val === box4Val && box4Val === box7Val || box7Val === box8Val && box8Val === box9Val || box3Val === box6Val && box6Val === box9Val || box2Val === box5Val && box5Val === box8Val || box4Val === box5Val && box5Val === box6Val) {
+                    if (box1Val === box2Val && box2Val === box3Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box2.style.backgroundColor = "#ffb703";
+                        box3.style.backgroundColor = "#ffb703";
+                    } else if (box1Val === box4Val && box4Val === box7Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box4.style.backgroundColor = "#ffb703";
+                        box7.style.backgroundColor = "#ffb703";
+
+                    } else if (box7Val === box8Val && box8Val === box9Val) {
+                        box7.style.backgroundColor = "#ffb703";
+                        box8.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+
+                    } else if (box3Val === box6Val && box6Val === box9Val) {
+                        box3.style.backgroundColor = "#ffb703";
+                        box6.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+                    } else if (box2Val === box5Val && box5Val === box8Val) {
+                        box2.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box8.style.backgroundColor = "#ffb703";
+                    } else if (box4Val === box5Val && box5Val === box6Val) {
+                        box4.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box6.style.backgroundColor = "#ffb703";
+                    }
+                    winnerMsg.innerHTML = "P1 Wins!";
+                    disabler();
+                    p2.classList.toggle('border');
+
+                } else if (box1Val === box5Val && box5Val === box9Val || box3Val === box5Val && box5Val === box7Val) {
+                    if (box1Val === box5Val && box5Val === box9Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+                    } else if (box3Val === box5Val && box5Val === box7Val) {
+                        box3.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box7.style.backgroundColor = "#ffb703";
+                    }
+                    winnerMsg.innerHTML = "P1 Wins!";
+                    disabler();
+                    p2.classList.toggle('border');
+
+                } else {
+                    checkDraw();
+                }
+            } else if (turnP2 == false) {
+                if (box1Val === box2Val && box2Val === box3Val || box1Val === box4Val && box4Val === box7Val || box7Val === box8Val && box8Val === box9Val || box3Val === box6Val && box6Val === box9Val || box2Val === box5Val && box5Val === box8Val || box4Val === box5Val && box5Val === box6Val) {
+                    if (box1Val === box2Val && box2Val === box3Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box2.style.backgroundColor = "#ffb703";
+                        box3.style.backgroundColor = "#ffb703";
+                    } else if (box1Val === box4Val && box4Val === box7Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box4.style.backgroundColor = "#ffb703";
+                        box7.style.backgroundColor = "#ffb703";
+
+                    } else if (box7Val === box8Val && box8Val === box9Val) {
+                        box7.style.backgroundColor = "#ffb703";
+                        box8.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+
+                    } else if (box3Val === box6Val && box6Val === box9Val) {
+                        box3.style.backgroundColor = "#ffb703";
+                        box6.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+                    } else if (box2Val === box5Val && box5Val === box8Val) {
+                        box2.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box8.style.backgroundColor = "#ffb703";
+                    } else if (box4Val === box5Val && box5Val === box6Val) {
+                        box4.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box6.style.backgroundColor = "#ffb703";
+                    }
+                    winnerMsg.innerHTML = "P2 Wins!";
+                    disabler();
+                    p1.classList.toggle('border');
+
+                } else if (box1Val === box5Val && box5Val === box9Val || box3Val === box5Val && box5Val === box7Val) {
+                    if (box1Val === box5Val && box5Val === box9Val) {
+                        box1.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box9.style.backgroundColor = "#ffb703";
+                    } else if (box3Val === box5Val && box5Val === box7Val) {
+                        box3.style.backgroundColor = "#ffb703";
+                        box5.style.backgroundColor = "#ffb703";
+                        box7.style.backgroundColor = "#ffb703";
+                    }
+                    winnerMsg.innerHTML = "P2 Wins!";
+                    disabler();
+                    p1.classList.toggle('border');
+
+                } else {
+                    checkDraw();
+                }
+            }
+
+        }
+
+        //  This function checks turn of p1 or p2
+        function checkTurn() {
+            const turn = Math.floor(Math.random() * 2) + 1;
+            container.style.display = 'flex';
+            btn1.style.display = 'none';
+            if (turn === 1) {
+                p1.classList.toggle('border');
+                winnerMsg.innerHTML = "P1's Turn";
+                turnP1 = true;
+                turnP2 = false;
+                isX = true;
+                is0 = false;
+
+            } else if (turn === 2) {
+                p2.classList.toggle('border');
+                winnerMsg.innerHTML = "P2's Turn";
+                turnP2 = true;
+                turnP1 = false;
+                isX = true;
+                is0 = false;
+            }
+
+        }
+
+        // main logic
+
+        reset.addEventListener('click', () => {
+            window.location.reload();
+        })
+
+        btn1.addEventListener('click', () => {
+            checkTurn();
+
+        }, { once: true })
+
+        box1.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box1.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box1Val = 'X';
+                } else if (is0 == true) {
+                    box1.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box1Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box1.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box1Val = 'X';
+                } else if (is0 == true) {
+                    box1.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box1Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box2.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box2.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box2Val = 'X';
+                } else if (is0 == true) {
+                    box2.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box2Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box2.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box2Val = 'X';
+                } else if (is0 == true) {
+                    box2.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box2Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box3.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box3.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box3Val = 'X';
+                } else if (is0 == true) {
+                    box3.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box3Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box3.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box3Val = 'X';
+                } else if (is0 == true) {
+                    box3.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box3Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box4.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box4.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box4Val = 'X';
+                } else if (is0 == true) {
+                    box4.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box4Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box4.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box4Val = 'X';
+                } else if (is0 == true) {
+                    box4.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box4Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box5.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box5.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box5Val = 'X';
+                } else if (is0 == true) {
+                    box5.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box5Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box5.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box5Val = 'X';
+                } else if (is0 == true) {
+                    box5.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box5Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box6.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box6.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box6Val = 'X';
+                } else if (is0 == true) {
+                    box6.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box6Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box6.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box6Val = 'X';
+                } else if (is0 == true) {
+                    box6.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box6Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box7.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box7.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box7Val = 'X';
+                } else if (is0 == true) {
+                    box7.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box7Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box7.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box7Val = 'X';
+                } else if (is0 == true) {
+                    box7.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box7Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box8.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box8.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box8Val = 'X';
+                } else if (is0 == true) {
+                    box8.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box8Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box8.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box8Val = 'X';
+                } else if (is0 == true) {
+                    box8.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box8Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+
+        box9.addEventListener('click', () => {
+            if (turnP1 === true) {
+                if (isX == true) {
+                    box9.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box9Val = 'X';
+                } else if (is0 == true) {
+                    box9.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P2's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = false;
+                    turnP2 = true;
+                    box9Val = '0';
+                }
+            } else if (turnP2 === true) {
+                if (isX == true) {
+                    box9.innerHTML = "X";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = false;
+                    is0 = true;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box9Val = 'X';
+                } else if (is0 == true) {
+                    box9.innerHTML = "0";
+                    p1.classList.toggle('border');
+                    p2.classList.toggle('border');
+                    winnerMsg.innerHTML = "P1's Turn";
+                    isX = true;
+                    is0 = false;
+                    turnP1 = true;
+                    turnP2 = false;
+                    box9Val = '0';
+                }
+            }
+            winnerCheck();
+        }, { once: true });
+    </script>
+</body>
+
+</html>

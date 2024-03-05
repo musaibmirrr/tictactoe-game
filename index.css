@@ -151,9 +151,9 @@ section {
         align-items: center;
     }
 
-    /* .nav{
+    .nav{
         width: 260px;
-    } */
+    }
 }
 
 @media (max-width:380px){
@@ -173,9 +173,9 @@ section {
         width: 60px;
     }
 
-    /* .nav{
+    .nav{
         width: 200px;
-    } */
+    }
 }
 
 @media  (min-width:617px){

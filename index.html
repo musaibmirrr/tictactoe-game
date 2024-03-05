@@ -111,6 +111,23 @@
             box9.disabled = true;
         }
 
+        //enabler function
+        function enabler() {
+            box1.disabled = false;
+            box2.disabled = false;
+            box3.disabled = false;
+            box4.disabled = false;
+            box5.disabled = false;
+            box6.disabled = false;
+            box7.disabled = false;
+            box8.disabled = false;
+            box9.disabled = false;
+        }
+
+        window.addEventListener('load',()=>{
+            disabler();
+        })
+
 
         // This function checks for a winner
         function winnerCheck() {
@@ -220,6 +237,7 @@
 
         //  This function checks turn of p1 or p2
         function checkTurn() {
+            enabler();
             const turn = Math.floor(Math.random() * 2) + 1;
             container.style.display = 'flex';
             btn1.style.display = 'none';

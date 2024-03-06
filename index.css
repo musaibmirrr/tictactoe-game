@@ -165,12 +165,12 @@ section {
 
 @media (min-width:360px) {
     .container {
-        width: 300px;
+        width: 350px;
     }
 
     .boxes {
-        width: 90px;
-        height: 90px;
+        width: 106px;
+        height: 106px;
     }
 
     body {

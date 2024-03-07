@@ -179,6 +179,14 @@ section {
         justify-content: center;
         align-items: center;
     }
+
+    #btn1 {
+        width: 100px;
+    }
+
+    #btn2 {
+        width: 100px;
+    }
 }
 
 
@@ -202,6 +210,14 @@ section {
 
     .nav {
         width: 260px;
+    }
+
+    #btn1 {
+        width: 100px;
+    }
+
+    #btn2 {
+        width: 100px;
     }
 }
 
@@ -231,6 +247,14 @@ section {
         display: flex;
         justify-content: space-evenly;
         width: 480px;
+    }
+
+    #btn1 {
+        width: 100px;
+    }
+
+    #btn2 {
+        width: 100px;
     }
 
 }
